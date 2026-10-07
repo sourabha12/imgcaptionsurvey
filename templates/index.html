@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Image Caption Evaluation Survey</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            margin-bottom: 18px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        img {
+            width: 500px;
+            max-width: 100%;
+            display: block;
+            margin: 20px auto;
+            border-radius: 10px;
+        }
+
+        .caption {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        .question {
+            margin-top: 25px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .options label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .options input {
+            width: auto;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        #survey {
+            display: none;
+        }
+
+        #thankyou {
+            display: none;
+            text-align: center;
+        }
+
+        #error {
+            color: red;
+            text-align: center;
+        }
+
+        .progress {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- PARTICIPANT DETAILS -->
+
+    <div id="details">
+
+        <h1>Image Caption Evaluation</h1>
+
+        <p>
+            Please enter your details before starting the survey.
+        </p>
+
+
+        <label>
+            Name
+        </label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+        >
+
+
+        <label>
+            Gmail ID
+        </label>
+
+        <input
+            type="email"
+            id="gmail"
+            placeholder="Enter your Gmail ID"
+        >
+
+
+        <button onclick="startSurvey()">
+            Start Survey
+        </button>
+
+        <p id="error"></p>
+
+    </div>
+
+
+
+    <!-- SURVEY -->
+
+    <div id="survey">
+
+        <div class="progress">
+
+            Image <span id="current">1</span> of 20
+
+        </div>
+
+
+        <img id="image" src="">
+
+
+        <div class="caption">
+
+            <b>Generated Caption:</b>
+
+            <span id="caption"></span>
+
+        </div>
+
+
+        <!-- ACCURACY -->
+
+        <div class="question">
+
+            <b>1. How accurate is the caption?</b>
+
+            <div class="options">
+
+                <label>
+                    <input type="radio" name="accuracy" value="1">
+                    1
+                </label>
+
+                <label>
+                    <input type="radio" name="accuracy" value="2">
+                    2
+                </label>
+
+                <label>
+                    <input type="radio" name="accuracy" value="3">
+                    3
+                </label>
+
+                <label>
+                    <input type="radio" name="accuracy" value="4">
+                    4
+                </label>
+
+                <label>
+                    <input type="radio" name="accuracy" value="5">
+                    5
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- RELEVANCE -->
+
+        <div class="question">
+
+            <b>2. How relevant is the caption to the image?</b>
+
+            <div class="options">
+
+                <label><input type="radio" name="relevance" value="1">1</label>
+                <label><input type="radio" name="relevance" value="2">2</label>
+                <label><input type="radio" name="relevance" value="3">3</label>
+                <label><input type="radio" name="relevance" value="4">4</label>
+                <label><input type="radio" name="relevance" value="5">5</label>
+
+            </div>
+
+        </div>
+
+
+        <!-- FLUENCY -->
+
+        <div class="question">
+
+            <b>3. How fluent/natural is the caption?</b>
+
+            <div class="options">
+
+                <label><input type="radio" name="fluency" value="1">1</label>
+                <label><input type="radio" name="fluency" value="2">2</label>
+                <label><input type="radio" name="fluency" value="3">3</label>
+                <label><input type="radio" name="fluency" value="4">4</label>
+                <label><input type="radio" name="fluency" value="5">5</label>
+
+            </div>
+
+        </div>
+
+
+        <!-- DETAIL -->
+
+        <div class="question">
+
+            <b>4. Does the caption contain enough detail?</b>
+
+            <div class="options">
+
+                <label><input type="radio" name="detail" value="1">1</label>
+                <label><input type="radio" name="detail" value="2">2</label>
+                <label><input type="radio" name="detail" value="3">3</label>
+                <label><input type="radio" name="detail" value="4">4</label>
+                <label><input type="radio" name="detail" value="5">5</label>
+
+            </div>
+
+        </div>
+
+
+        <!-- OVERALL -->
+
+        <div class="question">
+
+            <b>5. Overall quality of the caption?</b>
+
+            <div class="options">
+
+                <label><input type="radio" name="overall" value="1">1</label>
+                <label><input type="radio" name="overall" value="2">2</label>
+                <label><input type="radio" name="overall" value="3">3</label>
+                <label><input type="radio" name="overall" value="4">4</label>
+                <label><input type="radio" name="overall" value="5">5</label>
+
+            </div>
+
+        </div>
+
+
+        <button onclick="nextImage()">
+
+            Next Image
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- THANK YOU -->
+
+    <div id="thankyou">
+
+        <h1>Thank You! 🎉</h1>
+
+        <p>
+            Your responses have been successfully submitted.
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+let surveyData = [];
+
+let currentIndex = 0;
+
+let responses = [];
+
+let participantName = "";
+
+let participantGmail = "";
+
+
+// -----------------------------
+// START SURVEY
+// -----------------------------
+
+function startSurvey() {
+
+    participantName =
+        document.getElementById("name").value.trim();
+
+    participantGmail =
+        document.getElementById("gmail").value.trim();
+
+
+    if (participantName === "") {
+
+        document.getElementById("error").innerText =
+            "Please enter your name.";
+
+        return;
+
+    }
+
+
+    if (participantGmail === "") {
+
+        document.getElementById("error").innerText =
+            "Please enter your Gmail ID.";
+
+        return;
+
+    }
+
+
+    if (!participantGmail.includes("@gmail.com")) {
+
+        document.getElementById("error").innerText =
+            "Please enter a valid Gmail ID.";
+
+        return;
+
+    }
+
+
+    fetch("/survey_data")
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            surveyData = data;
+
+            if (surveyData.length === 0) {
+
+                alert("No images found.");
+
+                return;
+
+            }
+
+            document.getElementById("details").style.display =
+                "none";
+
+            document.getElementById("survey").style.display =
+                "block";
+
+            showImage();
+
+        });
+
+}
+
+
+// -----------------------------
+// SHOW IMAGE
+// -----------------------------
+
+function showImage() {
+
+    let item = surveyData[currentIndex];
+
+    document.getElementById("current").innerText =
+        currentIndex + 1;
+
+    document.getElementById("image").src =
+        item.image;
+
+    document.getElementById("caption").innerText =
+        item.caption;
+
+    clearRatings();
+
+}
+
+
+// -----------------------------
+// CLEAR RATINGS
+// -----------------------------
+
+function clearRatings() {
+
+    document
+        .querySelectorAll("input[type=radio]")
+        .forEach(radio => {
+
+            radio.checked = false;
+
+        });
+
+}
+
+
+// -----------------------------
+// GET RATING
+// -----------------------------
+
+function getRating(name) {
+
+    let selected =
+        document.querySelector(
+            'input[name="' + name + '"]:checked'
+        );
+
+    if (!selected) {
+
+        return null;
+
+    }
+
+    return parseInt(selected.value);
+
+}
+
+
+// -----------------------------
+// NEXT IMAGE
+// -----------------------------
+
+function nextImage() {
+
+
+    let accuracy =
+        getRating("accuracy");
+
+    let relevance =
+        getRating("relevance");
+
+    let fluency =
+        getRating("fluency");
+
+    let detail =
+        getRating("detail");
+
+    let overall =
+        getRating("overall");
+
+
+    if (
+        accuracy === null ||
+        relevance === null ||
+        fluency === null ||
+        detail === null ||
+        overall === null
+    ) {
+
+        alert("Please answer all 5 questions.");
+
+        return;
+
+    }
+
+
+    let item = surveyData[currentIndex];
+
+
+    responses.push({
+
+        image: item.filename,
+
+        caption: item.caption,
+
+        accuracy: accuracy,
+
+        relevance: relevance,
+
+        fluency: fluency,
+
+        detail: detail,
+
+        overall: overall
+
+    });
+
+
+    currentIndex++;
+
+
+    // 20 images completed
+
+    if (currentIndex >= surveyData.length) {
+
+        submitSurvey();
+
+        return;
+
+    }
+
+
+    showImage();
+
+}
+
+
+// -----------------------------
+// SUBMIT
+// -----------------------------
+
+function submitSurvey() {
+
+    fetch("/submit", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            name: participantName,
+
+            gmail: participantGmail,
+
+            responses: responses
+
+        })
+
+    })
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if (data.success) {
+
+            document.getElementById("survey").style.display =
+                "none";
+
+            document.getElementById("thankyou").style.display =
+                "block";
+
+        }
+
+    });
+
+}
+
+</script>
+
+
+</body>
+
+</html>
