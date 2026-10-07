@@ -1,0 +1,6 @@
+.venv/
+.vscode/
+.dist/
+Flickr8k_Dataset/
+survey.db
+__pycache__/
